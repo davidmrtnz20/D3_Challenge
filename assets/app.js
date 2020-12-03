@@ -22,7 +22,8 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Import Data
-d3.csv("data.csv").then(function (healthData) {
+d3.csv("healthData.csv").then(function (err, healthData) {
+    if (err) throw err;
 
   // Step 1: Parse Data/Cast as numbers
   // ==============================
@@ -58,7 +59,7 @@ d3.csv("data.csv").then(function (healthData) {
   // Step 5: Create Circles
   // ==============================
   var circlesGroup = chartGroup.selectAll("circle")
-    .data(hairData)
+    .data(healthData)
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d.healthcare))
